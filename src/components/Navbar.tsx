@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { PhoneIcon, MenuIcon, CloseIcon, GlobeIcon } from './Icons';
+import { MenuIcon, CloseIcon, GlobeIcon, PhoneIcon } from './Icons';
 
 export const Navbar: React.FC = () => {
   const { lang, setLanguage, t } = useLanguage();
@@ -20,56 +20,55 @@ export const Navbar: React.FC = () => {
   return (
     <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <a href="#home" className="brand-logo" onClick={closeMobileMenu}>
+        {/* Brand Logo - Prominent on Left */}
+        <a href="#home" className="brand-logo" onClick={closeMobileMenu} title="Venkateswara Cane Work Home">
           <span className="brand-title">Venkateswara Cane Work</span>
         </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="desktop-nav">
-          <a href="#home">{t.nav.home}</a>
-          <a href="#about">{t.nav.about}</a>
-          <a href="#services">{t.nav.services}</a>
-          <a href="#gallery">{t.nav.gallery}</a>
-          <a href="#how-to-order">{t.nav.howToOrder}</a>
-          <a href="#why-us">{t.nav.whyUs}</a>
-          <a href="#contact">{t.nav.contact}</a>
-        </nav>
+        {/* Right Header Controls Group (Nav Links + Language Switcher) */}
+        <div className="navbar-right-group">
+          {/* Desktop Nav Links */}
+          <nav className="desktop-nav">
+            <a href="#home">{t.nav.home}</a>
+            <a href="#about">{t.nav.about}</a>
+            <a href="#services">{t.nav.services}</a>
+            <a href="#gallery">{t.nav.gallery}</a>
+            <a href="#how-to-order">{t.nav.howToOrder}</a>
+            <a href="#why-us">{t.nav.whyUs}</a>
+            <a href="#contact">{t.nav.contact}</a>
+          </nav>
 
-        {/* Desktop Language Switcher & Call Action */}
-        <div className="nav-actions">
-          <div className="lang-switcher-pill" role="radiogroup" aria-label="Language selection">
-            <button
-              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-              onClick={() => setLanguage('en')}
-              aria-pressed={lang === 'en'}
-              title="English"
+          {/* Right Nav Actions (Language Switcher & Mobile Menu Toggle) */}
+          <div className="nav-actions">
+            <div className="lang-switcher-pill" role="radiogroup" aria-label="Language selection">
+              <button
+                className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+                onClick={() => setLanguage('en')}
+                aria-pressed={lang === 'en'}
+                title="English"
+              >
+                English
+              </button>
+              <span className="lang-divider">|</span>
+              <button
+                className={`lang-btn telugu-font ${lang === 'te' ? 'active' : ''}`}
+                onClick={() => setLanguage('te')}
+                aria-pressed={lang === 'te'}
+                title="తెలుగు"
+              >
+                తెలుగు
+              </button>
+            </div>
+
+            {/* Mobile Menu Toggle Button */}
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              English
-            </button>
-            <span className="lang-divider">|</span>
-            <button
-              className={`lang-btn telugu-font ${lang === 'te' ? 'active' : ''}`}
-              onClick={() => setLanguage('te')}
-              aria-pressed={lang === 'te'}
-              title="తెలుగు"
-            >
-              తెలుగు
+              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
-
-          <a href="tel:+919966232996" className="btn-call-nav">
-            <PhoneIcon className="icon-sm" />
-            <span>{t.nav.callNow}</span>
-          </a>
-
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
         </div>
       </div>
 

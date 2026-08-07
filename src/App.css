@@ -15,7 +15,7 @@
 }
 
 .section {
-  padding: 96px 6%;
+  padding: 84px 6%;
 }
 
 .section-container {
@@ -205,24 +205,37 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
 
 .brand-title {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: clamp(1.35rem, 2.2vw, 1.62rem);
   font-weight: 700;
   color: var(--text-dark);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  transition: color var(--transition-fast);
+}
+
+.brand-logo:hover .brand-title {
+  color: var(--color-gold);
+}
+
+.navbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
 }
 
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
 }
 
 .desktop-nav a {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--text-body);
   position: relative;
   padding: 4px 0;
+  white-space: nowrap;
 }
 
 .desktop-nav a:hover {
@@ -1321,38 +1334,39 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
 .contact-section {
   background-color: var(--bg-ivory);
   border-top: 1px solid var(--border-subtle);
+  padding: 56px 6%;
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
-  align-items: start;
+  gap: 32px;
+  align-items: center;
 }
 
 .contact-intro {
-  font-size: 1.08rem;
+  font-size: 1.02rem;
   color: var(--text-body);
-  margin-bottom: 32px;
-  line-height: 1.7;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .contact-info-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 36px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .info-item {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   align-items: flex-start;
 }
 
 .info-icon-wrapper {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
   background-color: var(--color-gold-light);
   color: var(--color-gold);
@@ -1363,24 +1377,24 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
 }
 
 .info-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .info-item strong {
   display: block;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   color: var(--text-dark);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .info-item p {
-  font-size: 0.98rem;
+  font-size: 0.94rem;
   color: var(--text-body);
 }
 
 .sub-text {
-  font-size: 0.85rem !important;
+  font-size: 0.82rem !important;
   color: var(--text-muted) !important;
 }
 
@@ -1396,7 +1410,13 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
 .contact-actions-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
+}
+
+.contact-actions-row .btn {
+  height: 46px;
+  padding: 0 22px;
+  font-size: 0.9rem;
 }
 
 /* Map Frame Placeholder */
@@ -1408,7 +1428,7 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
   background-color: var(--bg-dark-brown);
   color: var(--text-light);
   border-radius: var(--radius-xl);
-  padding: 36px;
+  padding: 24px 28px;
   border: 1px solid var(--border-dark-subtle);
   box-shadow: var(--shadow-elevated);
   display: flex;
@@ -1423,56 +1443,57 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 5px 12px;
   background-color: rgba(232, 195, 135, 0.15);
   color: var(--color-gold-soft);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   border-radius: var(--radius-full);
-  margin-bottom: 32px;
+  margin-bottom: 18px;
 }
 
 .map-visual {
-  padding: 36px 24px;
+  padding: 20px 16px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: var(--radius-lg);
   border: 1px dashed var(--border-dark-subtle);
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   position: relative;
 }
 
 .map-pin {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  margin-bottom: 6px;
 }
 
 .map-visual h3 {
   color: var(--color-gold-soft);
-  font-size: 1.4rem;
-  margin-bottom: 4px;
+  font-size: 1.25rem;
+  margin-bottom: 2px;
 }
 
 .map-visual p {
   color: var(--text-light);
   font-weight: 600;
+  font-size: 0.92rem;
 }
 
 .map-sub {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--text-light-muted);
 }
 
 .map-footer-note p {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--text-light-muted);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 
 .btn-map-location {
   display: inline-block;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 800;
   color: var(--color-gold-soft);
 }
@@ -1725,6 +1746,16 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
   }
 }
 
+@media (max-width: 1080px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
 @media (max-width: 840px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -1742,14 +1773,6 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
 
   .lightbox-grid {
     grid-template-columns: 1fr;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
   }
 
   .gallery-header-row {
@@ -1780,12 +1803,13 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
     padding: 12px 4%;
   }
 
-  html {
-    scroll-padding-top: 74px;
+  .hero-section {
+    scroll-margin-top: 68px;
   }
 
-  section, .hero-section {
-    scroll-margin-top: 74px;
+  .section {
+    padding: 60px 5%;
+    scroll-margin-top: 10px;
   }
 
   .brand-title {

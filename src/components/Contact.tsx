@@ -2,25 +2,13 @@ import React from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { PhoneIcon, WhatsAppIcon, LocationIcon, NavigationIcon } from './Icons';
 
-// Centralized Config for Google Maps URL. Update when verified shop URL is available.
-const GOOGLE_MAPS_URL: string | null = null;
+// Centralized Config for Verified Google Maps Location URL
+const GOOGLE_MAPS_URL = "https://www.google.com/maps/place/14%C2%B027'21.6%22N+79%C2%B059'14.0%22E/@14.456006,79.9846477,17z/data=!3m1!4b1!4m4!3m3!8m2!3d14.456006!4d79.9872226?hl=en&entry=ttu";
 
 export const Contact: React.FC = () => {
   const { lang, t } = useLanguage();
 
   const waText = encodeURIComponent(t.whatsappMessages.general);
-  const waLocationText = encodeURIComponent(
-    lang === 'te'
-      ? "నమస్కారం కొండ పవన్ కుమార్ గారు, దయచేసి మీ వర్క్‌షాప్ లొకేషన్ పంపండి."
-      : "Hi Konda Pavan Kumar, please share your shop/workshop location in Nellore."
-  );
-
-  const handleDirectionsClick = (e: React.MouseEvent) => {
-    if (!GOOGLE_MAPS_URL) {
-      e.preventDefault();
-      window.open(`https://wa.me/919966232996?text=${waLocationText}`, '_blank');
-    }
-  };
 
   return (
     <section id="contact" className="section contact-section">
@@ -96,9 +84,8 @@ export const Contact: React.FC = () => {
               </a>
 
               <a
-                href={GOOGLE_MAPS_URL || '#'}
-                onClick={handleDirectionsClick}
-                target={GOOGLE_MAPS_URL ? "_blank" : "_self"}
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="btn secondary-light-btn"
               >
@@ -108,7 +95,7 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Clean Map Placeholder Frame */}
+          {/* Interactive Verified Map Card */}
           <div className="contact-map-wrapper">
             <div className="map-placeholder-card">
               <div className="map-badge">
@@ -116,22 +103,28 @@ export const Contact: React.FC = () => {
                 <span>{t.contact.workshopTitle}</span>
               </div>
               
-              <div className="map-visual">
+              <a 
+                href={GOOGLE_MAPS_URL} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="map-visual"
+                title="Open Google Maps Location"
+              >
                 <div className="map-pin">📍</div>
                 <h3>{t.brandName}</h3>
                 <p>{t.locationName}</p>
-                <span className="map-sub">{t.ownerName}</span>
-              </div>
+                <span className="map-sub">14°27'21.6"N 79°59'14.0"E • {t.ownerName}</span>
+              </a>
 
               <div className="map-footer-note">
                 <p>📍 {t.contact.locationNote}</p>
                 <a
-                  href={`https://wa.me/919966232996?text=${waLocationText}`}
+                  href={GOOGLE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-map-location"
                 >
-                  {t.contact.locationReqBtn}
+                  {lang === 'te' ? "గూగుల్ మ్యాప్స్‌లో షాప్ లొకేషన్ చూడండి →" : "View Shop Location on Google Maps →"}
                 </a>
               </div>
             </div>
