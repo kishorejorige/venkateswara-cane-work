@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
           <span className="brand-title">Venkateswara Cane Work</span>
         </a>
 
-        {/* Right Header Controls Group (Nav Links + Language Switcher) */}
+        {/* Right Header Controls Group (Nav Links + Language Switcher + Call Button) */}
         <div className="navbar-right-group">
           {/* Desktop Nav Links */}
           <nav className="desktop-nav">
@@ -38,7 +38,7 @@ export const Navbar: React.FC = () => {
             <a href="#contact">{t.nav.contact}</a>
           </nav>
 
-          {/* Right Nav Actions (Language Switcher & Mobile Menu Toggle) */}
+          {/* Right Nav Actions (Language Switcher, Call Action & Mobile Menu Toggle) */}
           <div className="nav-actions">
             <div className="lang-switcher-pill" role="radiogroup" aria-label="Language selection">
               <button
@@ -59,6 +59,11 @@ export const Navbar: React.FC = () => {
                 తెలుగు
               </button>
             </div>
+
+            <a href="tel:+919966232996" className="btn-call-nav" title="Call Konda Pavan Kumar">
+              <PhoneIcon className="icon-sm" />
+              <span>{t.nav.callNow}</span>
+            </a>
 
             {/* Mobile Menu Toggle Button */}
             <button 

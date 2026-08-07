@@ -52,15 +52,12 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 76px;
   font-size: 16px;
 }
 
-.hero-section {
-  scroll-margin-top: 74px;
-}
-
-.section {
-  scroll-margin-top: 10px;
+section, .hero-section {
+  scroll-margin-top: 76px;
 }
 
 body {
