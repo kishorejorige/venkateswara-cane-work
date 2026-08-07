@@ -1,0 +1,110 @@
+/* Base reset & typography setup */
+:root {
+  /* Color Palette - Premium Handcrafted Indian Furniture Aesthetic */
+  --bg-cream: #FAF7F2;
+  --bg-ivory: #FFFDF9;
+  --bg-paper: #FFFFFF;
+  --bg-accent-light: #F4EBE0;
+  
+  --bg-dark-brown: #2A1B14;
+  --bg-dark-card: #38251C;
+  --bg-dark-subtle: #1F120B;
+
+  --color-gold: #C88A35;
+  --color-gold-hover: #B37829;
+  --color-gold-light: #F7ECE1;
+  --color-gold-soft: #E8C387;
+
+  --color-earth-green: #3D5A45;
+  --color-earth-green-light: #EBF2EC;
+
+  --text-dark: #2A1B14;
+  --text-body: #594539;
+  --text-muted: #826F63;
+  --text-light: #FDFBF8;
+  --text-light-muted: rgba(253, 251, 248, 0.75);
+
+  --border-subtle: rgba(140, 84, 30, 0.14);
+  --border-strong: rgba(140, 84, 30, 0.28);
+  --border-dark-subtle: rgba(232, 195, 135, 0.18);
+
+  --shadow-soft: 0 12px 32px -6px rgba(42, 27, 20, 0.06), 0 4px 12px -2px rgba(42, 27, 20, 0.03);
+  --shadow-elevated: 0 20px 48px -10px rgba(42, 27, 20, 0.12), 0 8px 20px -4px rgba(42, 27, 20, 0.05);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-cream);
+  color: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-dark);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D9C9B8;
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
