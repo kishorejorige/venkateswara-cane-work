@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { CloseIcon, WhatsAppIcon, PhoneIcon } from './Icons';
+import { useLanguage } from '../hooks/useLanguage';
+import { CloseIcon, WhatsAppIcon, PhoneIcon, ChevronLeftIcon, ChevronRightIcon } from './Icons';
 
 export interface GalleryItem {
   id: string;
@@ -13,13 +14,30 @@ export interface GalleryItem {
 interface LightboxModalProps {
   item: GalleryItem | null;
   onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  hasPrev: boolean;
+  hasNext: boolean;
 }
 
-export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose }) => {
+export const LightboxModal: React.FC<LightboxModalProps> = ({
+  item,
+  onClose,
+  onPrev,
+  onNext,
+  hasPrev,
+  hasNext,
+}) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
+      } else if (e.key === 'ArrowLeft' && hasPrev) {
+        onPrev();
+      } else if (e.key === 'ArrowRight' && hasNext) {
+        onNext();
       }
     };
     if (item) {
@@ -30,20 +48,35 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose }) =
       document.body.style.overflow = 'auto';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [item, onClose]);
+  }, [item, onClose, onPrev, onNext, hasPrev, hasNext]);
 
   if (!item) return null;
 
   const whatsappText = encodeURIComponent(
-    `Hi Konda Pavan Kumar, I am interested in your ${item.title} (${item.category}) shown on your website.`
+    t.whatsappMessages.productQuery(item.title)
   );
 
   return (
-    <div className="lightbox-overlay" onClick={onClose} role="dialog" aria-modal="true">
+    <div className="lightbox-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={item.title}>
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <button className="lightbox-close-btn" onClick={onClose} aria-label="Close modal">
+        {/* Close Button */}
+        <button className="lightbox-close-btn" onClick={onClose} aria-label={t.lightbox.close} title={t.lightbox.close}>
           <CloseIcon />
         </button>
+
+        {/* Prev Button */}
+        {hasPrev && (
+          <button className="lightbox-nav-btn prev-btn" onClick={onPrev} aria-label={t.lightbox.prev} title={t.lightbox.prev}>
+            <ChevronLeftIcon />
+          </button>
+        )}
+
+        {/* Next Button */}
+        {hasNext && (
+          <button className="lightbox-nav-btn next-btn" onClick={onNext} aria-label={t.lightbox.next} title={t.lightbox.next}>
+            <ChevronRightIcon />
+          </button>
+        )}
 
         <div className="lightbox-grid">
           <div className="lightbox-image-container">
@@ -56,8 +89,8 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose }) =
             <p className="lightbox-description">{item.description}</p>
 
             <div className="lightbox-meta">
-              <div className="meta-badge">Handcrafted in Nellore</div>
-              <div className="meta-badge">Custom Sizes Available</div>
+              <div className="meta-badge">{t.lightbox.handcrafted}</div>
+              <div className="meta-badge">{t.lightbox.customSizes}</div>
             </div>
 
             <div className="lightbox-actions">
@@ -68,12 +101,12 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({ item, onClose }) =
                 className="btn whatsapp-btn full-width"
               >
                 <WhatsAppIcon className="btn-icon" />
-                <span>Inquire on WhatsApp</span>
+                <span>{t.lightbox.askWhatsapp}</span>
               </a>
 
               <a href="tel:+919966232996" className="btn primary-btn full-width">
                 <PhoneIcon className="btn-icon" />
-                <span>Call 9966232996</span>
+                <span>{t.lightbox.call}</span>
               </a>
             </div>
           </div>

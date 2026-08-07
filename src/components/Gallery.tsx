@@ -1,42 +1,60 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import type { GalleryItem } from './LightboxModal';
 import { LightboxModal } from './LightboxModal';
 import { ZoomIcon, SparkleIcon } from './Icons';
 
 export const Gallery: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const { t } = useLanguage();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const galleryItems: GalleryItem[] = [
     {
       id: 'item-1',
-      title: 'Classic Handcrafted Cane Chair',
-      category: 'Cane Chair',
+      title: t.gallery.items.item1Title,
+      category: t.gallery.items.item1Cat,
       image: '/images/chair.png',
-      description: 'Ergonomically designed traditional cane arm chair with intricate hand-woven rattan backing and sturdy structure.',
-      dimensions: 'Standard Home & Veranda Size'
+      description: t.gallery.items.item1Desc,
     },
     {
       id: 'item-2',
-      title: 'Handmade Cane Swing (Jhula)',
-      category: 'Cane Swing',
+      title: t.gallery.items.item2Title,
+      category: t.gallery.items.item2Cat,
       image: '/images/hanging-chair.png',
-      description: 'Luxurious drop-shaped hanging cane swing designed for balcony, patio, or living room relaxation.',
-      dimensions: 'Single/Double Seater Options'
+      description: t.gallery.items.item2Desc,
     },
     {
       id: 'item-3',
-      title: 'Masterpiece Workshop Showcase',
-      category: 'Cane Sofa Set',
+      title: t.gallery.items.item3Title,
+      category: t.gallery.items.item3Cat,
       image: '/images/shop-banner.jpg',
-      description: 'A glimpse of custom cane sofa sets, center tables, and handcrafted chairs made in our Nellore workshop.',
-      dimensions: 'Customized to Order'
+      description: t.gallery.items.item3Desc,
     }
   ];
 
-  const filteredItems = activeFilter === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category.toLowerCase().includes(activeFilter.toLowerCase()));
+  const filteredItems = activeFilter === 'all'
+    ? galleryItems
+    : galleryItems.filter(item => {
+        if (activeFilter === 'chair') return item.id === 'item-1';
+        if (activeFilter === 'swing') return item.id === 'item-2';
+        if (activeFilter === 'sofa') return item.id === 'item-3';
+        return true;
+      });
+
+  const selectedItem = selectedIndex !== null ? filteredItems[selectedIndex] ?? null : null;
+
+  const handlePrev = () => {
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (selectedIndex !== null && selectedIndex < filteredItems.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+    }
+  };
 
   return (
     <section id="gallery" className="section gallery-section">
@@ -45,13 +63,13 @@ export const Gallery: React.FC = () => {
           <div>
             <div className="eyebrow-badge green">
               <SparkleIcon className="icon-badge" />
-              <span>OUR WORK GALLERY</span>
+              <span>{t.gallery.eyebrow}</span>
             </div>
-            <h2 className="section-title">Furniture Made By Hand in Nellore</h2>
+            <h2 className="section-title">{t.gallery.title}</h2>
           </div>
 
           <p className="gallery-header-desc">
-            Explore authentic photographs of cane furniture handcrafted by Konda Pavan Kumar. Click any item to enlarge and inquire.
+            {t.gallery.desc}
           </p>
         </div>
 
@@ -61,35 +79,44 @@ export const Gallery: React.FC = () => {
             className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
             onClick={() => setActiveFilter('all')}
           >
-            All Work
+            {t.gallery.filterAll}
           </button>
           <button 
             className={`filter-btn ${activeFilter === 'chair' ? 'active' : ''}`}
             onClick={() => setActiveFilter('chair')}
           >
-            Cane Chairs
+            {t.gallery.filterChairs}
           </button>
           <button 
             className={`filter-btn ${activeFilter === 'swing' ? 'active' : ''}`}
             onClick={() => setActiveFilter('swing')}
           >
-            Cane Swings
+            {t.gallery.filterSwings}
           </button>
           <button 
             className={`filter-btn ${activeFilter === 'sofa' ? 'active' : ''}`}
             onClick={() => setActiveFilter('sofa')}
           >
-            Sofa Sets
+            {t.gallery.filterSofas}
           </button>
         </div>
 
         {/* Responsive Gallery Grid */}
         <div className="gallery-grid-cards">
-          {filteredItems.map((item) => (
+          {filteredItems.map((item, index) => (
             <div 
               key={item.id} 
               className="gallery-card"
-              onClick={() => setSelectedItem(item)}
+              onClick={() => setSelectedIndex(index)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedIndex(index);
+                }
+              }}
+              aria-label={`${item.title} - ${t.gallery.viewDetails}`}
             >
               <div className="gallery-card-image-wrapper">
                 <img 
@@ -101,7 +128,7 @@ export const Gallery: React.FC = () => {
                 <div className="gallery-card-overlay">
                   <div className="zoom-badge">
                     <ZoomIcon className="icon-sm" />
-                    <span>View Details</span>
+                    <span>{t.gallery.viewDetails}</span>
                   </div>
                 </div>
                 <span className="gallery-card-category-badge">{item.category}</span>
@@ -111,8 +138,8 @@ export const Gallery: React.FC = () => {
                 <h3 className="gallery-card-title">{item.title}</h3>
                 <p className="gallery-card-sub">{item.description}</p>
                 <div className="gallery-card-footer">
-                  <span className="craft-tag">Handcrafted Rattan</span>
-                  <span className="inquire-arrow">View & Inquire →</span>
+                  <span className="craft-tag">{t.gallery.handcraftedTag}</span>
+                  <span className="inquire-arrow">{t.gallery.inquireArrow}</span>
                 </div>
               </div>
             </div>
@@ -123,7 +150,11 @@ export const Gallery: React.FC = () => {
       {/* Lightbox Modal */}
       <LightboxModal 
         item={selectedItem} 
-        onClose={() => setSelectedItem(null)} 
+        onClose={() => setSelectedIndex(null)}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        hasPrev={selectedIndex !== null && selectedIndex > 0}
+        hasNext={selectedIndex !== null && selectedIndex < filteredItems.length - 1}
       />
     </section>
   );

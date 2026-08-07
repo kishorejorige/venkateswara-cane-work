@@ -1,11 +1,16 @@
 import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import { WhatsAppIcon } from './Icons';
 
 export const FloatingWhatsapp: React.FC = () => {
+  const { t } = useLanguage();
+
+  const waText = encodeURIComponent(t.whatsappMessages.general);
+
   return (
     <a
       className="floating-whatsapp-btn"
-      href="https://wa.me/919966232996?text=Hi%20Konda%20Pavan%20Kumar,%20I%20am%20interested%20in%20your%20cane%20furniture%20work."
+      href={`https://wa.me/919966232996?text=${waText}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact Venkateswara Cane Work on WhatsApp"

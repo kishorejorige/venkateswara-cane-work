@@ -59,6 +59,22 @@
   letter-spacing: -0.02em;
 }
 
+/* Telugu typography refinement */
+html[lang="te"] body {
+  font-family: 'Noto Sans Telugu', var(--font-sans);
+}
+
+html[lang="te"] .section-title,
+html[lang="te"] .hero-headline,
+html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3 {
+  font-family: 'Noto Sans Telugu', var(--font-serif);
+  line-height: 1.35;
+}
+
+.telugu-font {
+  font-family: 'Noto Sans Telugu', var(--font-sans);
+}
+
 .section-subtitle {
   font-size: 1.12rem;
   color: var(--text-muted);
@@ -143,7 +159,7 @@
 
 
 /* ==========================================================================
-   1. NAVBAR
+   1. NAVBAR & LANGUAGE SWITCHER
    ========================================================================== */
 .navbar-header {
   position: sticky;
@@ -196,11 +212,11 @@
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 }
 
 .desktop-nav a {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-body);
   position: relative;
@@ -229,18 +245,49 @@
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+}
+
+/* Language Switcher Pill */
+.lang-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-accent-light);
+  padding: 3px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.lang-btn.active {
+  background-color: var(--bg-dark-brown);
+  color: var(--color-gold-soft);
+  box-shadow: 0 2px 6px rgba(42, 27, 20, 0.15);
+}
+
+.lang-divider {
+  color: var(--border-strong);
+  font-size: 0.75rem;
+  margin: 0 1px;
 }
 
 .btn-call-nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 20px;
+  padding: 9px 18px;
   background-color: var(--bg-dark-brown);
   color: var(--color-gold-soft);
   border-radius: var(--radius-full);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
   transition: all var(--transition-fast);
 }
@@ -277,21 +324,63 @@
 .mobile-nav-drawer {
   position: absolute;
   top: 70px;
-  left: 6%;
-  right: 6%;
+  left: 5%;
+  right: 5%;
   background-color: var(--bg-ivory);
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-elevated);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   border: 1px solid var(--border-subtle);
   animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mobile-lang-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-lang-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.mobile-lang-options {
+  display: flex;
+  gap: 6px;
+  background-color: var(--bg-cream);
+  padding: 3px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.mobile-lang-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-body);
+}
+
+.mobile-lang-btn.active {
+  background-color: var(--bg-dark-brown);
+  color: var(--color-gold-soft);
 }
 
 .mobile-nav-drawer a {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-dark);
   padding: 10px 12px;
@@ -306,7 +395,7 @@
 
 .mobile-nav-cta {
   margin-top: 8px;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -357,11 +446,11 @@
 }
 
 .hero-headline {
-  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-dark);
-  line-height: 1.05;
+  line-height: 1.08;
   margin-bottom: 20px;
 }
 
@@ -373,7 +462,7 @@
 }
 
 .hero-description {
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   color: var(--text-body);
   max-width: 540px;
   line-height: 1.7;
@@ -489,7 +578,7 @@
 }
 
 .about-text-lead {
-  font-size: 1.2rem;
+  font-size: 1.18rem;
   color: var(--text-dark);
   line-height: 1.7;
   margin-bottom: 16px;
@@ -908,6 +997,38 @@
   transform: scale(1.1);
 }
 
+/* Prev/Next Navigation Buttons */
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-fast);
+}
+
+.lightbox-nav-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  background-color: var(--bg-dark-brown);
+  color: var(--color-gold-soft);
+}
+
+.lightbox-nav-btn.prev-btn {
+  left: 16px;
+}
+
+.lightbox-nav-btn.next-btn {
+  right: 16px;
+}
+
 .lightbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -982,7 +1103,82 @@
 
 
 /* ==========================================================================
-   6. CUSTOM WORK CTA SECTION
+   6. HOW TO ORDER SECTION
+   ========================================================================== */
+.how-to-order-section {
+  background-color: var(--bg-cream);
+}
+
+.how-to-order-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.order-step-card {
+  background-color: var(--bg-paper);
+  padding: 36px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  text-align: center;
+  transition: transform var(--transition-fast);
+}
+
+.order-step-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+}
+
+.step-number-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--bg-accent-light);
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-gold-light);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.step-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.step-description {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+
+/* ==========================================================================
+   7. CUSTOM WORK CTA SECTION
    ========================================================================== */
 .custom-cta-section {
   padding: 60px 6%;
@@ -1048,7 +1244,7 @@
 
 
 /* ==========================================================================
-   7. WHY CHOOSE US SECTION
+   8. WHY CHOOSE US SECTION
    ========================================================================== */
 .why-us-section {
   background-color: var(--bg-cream);
@@ -1106,7 +1302,7 @@
 
 
 /* ==========================================================================
-   8. CONTACT SECTION
+   9. CONTACT SECTION
    ========================================================================== */
 .contact-section {
   background-color: var(--bg-ivory);
@@ -1273,7 +1469,7 @@
 
 
 /* ==========================================================================
-   9. FLOATING WHATSAPP BUTTON
+   10. FLOATING WHATSAPP & MOBILE ACTION BAR
    ========================================================================== */
 .floating-whatsapp-btn {
   position: fixed;
@@ -1308,9 +1504,47 @@
   letter-spacing: 0.02em;
 }
 
+/* Mobile Sticky Bottom Action Bar */
+.mobile-bottom-action-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: rgba(31, 18, 11, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  gap: 12px;
+  border-top: 1px solid var(--border-dark-subtle);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.mobile-action-btn.call-action {
+  background-color: var(--color-gold);
+}
+
+.mobile-action-btn.whatsapp-action {
+  background-color: #25D366;
+}
+
 
 /* ==========================================================================
-   10. FOOTER SECTION
+   11. FOOTER SECTION
    ========================================================================== */
 .site-footer {
   background-color: var(--bg-dark-subtle);
@@ -1455,6 +1689,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .how-to-order-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .why-us-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1496,11 +1734,19 @@
     align-items: flex-start;
     gap: 16px;
   }
+
+  .how-to-order-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
   .section {
     padding: 70px 5%;
+  }
+
+  .site-wrapper {
+    padding-bottom: 60px; /* Space for mobile sticky action bar */
   }
 
   .navbar-container {
@@ -1539,14 +1785,12 @@
     width: 100%;
   }
 
-  .floating-wa-label {
-    display: none;
+  /* Show Sticky Bottom Action Bar & Hide Floating WhatsApp on mobile */
+  .mobile-bottom-action-bar {
+    display: flex;
   }
 
   .floating-whatsapp-btn {
-    padding: 12px;
-    border-radius: 50%;
-    bottom: 20px;
-    right: 20px;
+    display: none;
   }
 }

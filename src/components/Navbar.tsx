@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { PhoneIcon, MenuIcon, CloseIcon } from './Icons';
+import { useLanguage } from '../hooks/useLanguage';
+import { PhoneIcon, MenuIcon, CloseIcon, GlobeIcon } from './Icons';
 
 export const Navbar: React.FC = () => {
+  const { lang, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,22 +27,43 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop Nav Links */}
         <nav className="desktop-nav">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#gallery">Our Work</a>
-          <a href="#why-us">Why Us</a>
-          <a href="#contact">Contact</a>
+          <a href="#home">{t.nav.home}</a>
+          <a href="#about">{t.nav.about}</a>
+          <a href="#services">{t.nav.services}</a>
+          <a href="#gallery">{t.nav.gallery}</a>
+          <a href="#how-to-order">{t.nav.howToOrder}</a>
+          <a href="#why-us">{t.nav.whyUs}</a>
+          <a href="#contact">{t.nav.contact}</a>
         </nav>
 
-        {/* Desktop Call Button */}
+        {/* Desktop Language Switcher & Call Action */}
         <div className="nav-actions">
+          <div className="lang-switcher-pill" role="radiogroup" aria-label="Language selection">
+            <button
+              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+              onClick={() => setLanguage('en')}
+              aria-pressed={lang === 'en'}
+              title="English"
+            >
+              English
+            </button>
+            <span className="lang-divider">|</span>
+            <button
+              className={`lang-btn telugu-font ${lang === 'te' ? 'active' : ''}`}
+              onClick={() => setLanguage('te')}
+              aria-pressed={lang === 'te'}
+              title="తెలుగు"
+            >
+              తెలుగు
+            </button>
+          </div>
+
           <a href="tel:+919966232996" className="btn-call-nav">
             <PhoneIcon className="icon-sm" />
-            <span>Call Now</span>
+            <span>{t.nav.callNow}</span>
           </a>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button 
             className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -55,16 +78,38 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="mobile-nav-overlay" onClick={closeMobileMenu}>
           <nav className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
-            <a href="#home" onClick={closeMobileMenu}>Home</a>
-            <a href="#about" onClick={closeMobileMenu}>About</a>
-            <a href="#services" onClick={closeMobileMenu}>Services</a>
-            <a href="#gallery" onClick={closeMobileMenu}>Our Work</a>
-            <a href="#why-us" onClick={closeMobileMenu}>Why Choose Us</a>
-            <a href="#contact" onClick={closeMobileMenu}>Contact</a>
+            {/* Mobile Language Switcher */}
+            <div className="mobile-lang-row">
+              <span className="mobile-lang-label">
+                <GlobeIcon className="icon-sm" /> Language / భాష:
+              </span>
+              <div className="mobile-lang-options">
+                <button
+                  className={`mobile-lang-btn ${lang === 'en' ? 'active' : ''}`}
+                  onClick={() => { setLanguage('en'); closeMobileMenu(); }}
+                >
+                  English
+                </button>
+                <button
+                  className={`mobile-lang-btn telugu-font ${lang === 'te' ? 'active' : ''}`}
+                  onClick={() => { setLanguage('te'); closeMobileMenu(); }}
+                >
+                  తెలుగు
+                </button>
+              </div>
+            </div>
+
+            <a href="#home" onClick={closeMobileMenu}>{t.nav.home}</a>
+            <a href="#about" onClick={closeMobileMenu}>{t.nav.about}</a>
+            <a href="#services" onClick={closeMobileMenu}>{t.nav.services}</a>
+            <a href="#gallery" onClick={closeMobileMenu}>{t.nav.gallery}</a>
+            <a href="#how-to-order" onClick={closeMobileMenu}>{t.nav.howToOrder}</a>
+            <a href="#why-us" onClick={closeMobileMenu}>{t.nav.whyUs}</a>
+            <a href="#contact" onClick={closeMobileMenu}>{t.nav.contact}</a>
             
             <div className="mobile-nav-cta">
               <a href="tel:+919966232996" className="btn primary-btn full-width" onClick={closeMobileMenu}>
-                <PhoneIcon className="icon-sm" /> Call 9966232996
+                <PhoneIcon className="icon-sm" /> {t.hero.callBtn}
               </a>
             </div>
           </nav>

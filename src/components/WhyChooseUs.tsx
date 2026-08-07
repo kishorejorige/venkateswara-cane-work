@@ -1,27 +1,30 @@
 import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import { CheckIcon } from './Icons';
 
 export const WhyChooseUs: React.FC = () => {
+  const { t } = useLanguage();
+
   const reasons = [
     {
-      title: 'Handcrafted Work',
-      description: 'Artisanal hand weaving using 100% natural rattan for superior comfort and long-lasting quality.'
+      title: t.whyUs.reason1Title,
+      description: t.whyUs.reason1Desc
     },
     {
-      title: 'Custom Designs',
-      description: 'Tailored dimensions, patterns, and seating arrangements created precisely according to your preferences.'
+      title: t.whyUs.reason2Title,
+      description: t.whyUs.reason2Desc
     },
     {
-      title: 'Repair & Restoration',
-      description: 'Expert re-weaving and refurbishment to revive your classic and sentimental cane furniture.'
+      title: t.whyUs.reason3Title,
+      description: t.whyUs.reason3Desc
     },
     {
-      title: 'Local Nellore Service',
-      description: 'Prompt local delivery, personal consultation, and reliable after-sales service right here in Nellore.'
+      title: t.whyUs.reason4Title,
+      description: t.whyUs.reason4Desc
     },
     {
-      title: 'Direct Contact',
-      description: 'Speak directly with owner Konda Pavan Kumar for transparent pricing, custom quotes, and guidance.'
+      title: t.whyUs.reason5Title,
+      description: t.whyUs.reason5Desc
     }
   ];
 
@@ -29,11 +32,9 @@ export const WhyChooseUs: React.FC = () => {
     <section id="why-us" className="section why-us-section">
       <div className="section-container">
         <div className="section-header center">
-          <span className="section-eyebrow">OUR PROMISE</span>
-          <h2 className="section-title">Why Choose Venkateswara Cane Work</h2>
-          <p className="section-subtitle">
-            Dedicated to traditional Indian cane craftsmanship with unmatched personal attention to detail.
-          </p>
+          <span className="section-eyebrow">{t.whyUs.eyebrow}</span>
+          <h2 className="section-title">{t.whyUs.title}</h2>
+          <p className="section-subtitle">{t.whyUs.subtitle}</p>
         </div>
 
         <div className="why-us-grid">

@@ -1,18 +1,36 @@
 import React from 'react';
-import { PhoneIcon, WhatsAppIcon, LocationIcon } from './Icons';
+import { useLanguage } from '../hooks/useLanguage';
+import { PhoneIcon, WhatsAppIcon, LocationIcon, NavigationIcon } from './Icons';
+
+// Centralized Config for Google Maps URL. Update when verified shop URL is available.
+const GOOGLE_MAPS_URL: string | null = null;
 
 export const Contact: React.FC = () => {
+  const { lang, t } = useLanguage();
+
+  const waText = encodeURIComponent(t.whatsappMessages.general);
+  const waLocationText = encodeURIComponent(
+    lang === 'te'
+      ? "నమస్కారం కొండ పవన్ కుమార్ గారు, దయచేసి మీ వర్క్‌షాప్ లొకేషన్ పంపండి."
+      : "Hi Konda Pavan Kumar, please share your shop/workshop location in Nellore."
+  );
+
+  const handleDirectionsClick = (e: React.MouseEvent) => {
+    if (!GOOGLE_MAPS_URL) {
+      e.preventDefault();
+      window.open(`https://wa.me/919966232996?text=${waLocationText}`, '_blank');
+    }
+  };
+
   return (
     <section id="contact" className="section contact-section">
       <div className="section-container">
         <div className="contact-grid">
           {/* Contact Details Card */}
           <div className="contact-card">
-            <span className="section-eyebrow">VISIT OR CALL US</span>
-            <h2 className="section-title">Get in Touch with Konda Pavan Kumar</h2>
-            <p className="contact-intro">
-              Whether you want to buy new cane furniture, order custom designs, or restore existing pieces in Nellore, we are just a call or WhatsApp message away.
-            </p>
+            <span className="section-eyebrow">{t.contact.eyebrow}</span>
+            <h2 className="section-title">{t.contact.title}</h2>
+            <p className="contact-intro">{t.contact.intro}</p>
 
             <div className="contact-info-list">
               <div className="info-item">
@@ -20,10 +38,10 @@ export const Contact: React.FC = () => {
                   <LocationIcon className="info-icon" />
                 </div>
                 <div>
-                  <strong>Business Name & Address</strong>
-                  <p>Venkateswara Cane Work</p>
-                  <p className="sub-text">Proprietor: Konda Pavan Kumar</p>
-                  <p className="sub-text">Nellore, Andhra Pradesh, India</p>
+                  <strong>{t.contact.addressTitle}</strong>
+                  <p>{t.brandName}</p>
+                  <p className="sub-text">{t.contact.proprietorLabel} {t.ownerName}</p>
+                  <p className="sub-text">{t.locationName}</p>
                 </div>
               </div>
 
@@ -32,11 +50,11 @@ export const Contact: React.FC = () => {
                   <PhoneIcon className="info-icon" />
                 </div>
                 <div>
-                  <strong>Phone / Call Directly</strong>
+                  <strong>{t.contact.phoneTitle}</strong>
                   <p>
                     <a href="tel:+919966232996" className="phone-link">+91 9966232996</a>
                   </p>
-                  <p className="sub-text">Available Mon - Sat (8:00 AM - 8:00 PM)</p>
+                  <p className="sub-text">{t.contact.phoneHours}</p>
                 </div>
               </div>
 
@@ -45,18 +63,18 @@ export const Contact: React.FC = () => {
                   <WhatsAppIcon className="info-icon" />
                 </div>
                 <div>
-                  <strong>WhatsApp Direct Inquiry</strong>
+                  <strong>{t.contact.waTitle}</strong>
                   <p>
                     <a 
-                      href="https://wa.me/919966232996" 
+                      href={`https://wa.me/919966232996?text=${waText}`}
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="whatsapp-link"
                     >
-                      Chat on WhatsApp (+91 9966232996)
+                      +91 9966232996
                     </a>
                   </p>
-                  <p className="sub-text">Send photos of your old furniture for repair quotes!</p>
+                  <p className="sub-text">{t.contact.waSubtext}</p>
                 </div>
               </div>
             </div>
@@ -64,17 +82,28 @@ export const Contact: React.FC = () => {
             <div className="contact-actions-row">
               <a href="tel:+919966232996" className="btn primary-btn">
                 <PhoneIcon className="btn-icon" />
-                <span>Call 9966232996</span>
+                <span>{t.contact.callBtn}</span>
               </a>
 
               <a
-                href="https://wa.me/919966232996"
+                href={`https://wa.me/919966232996?text=${waText}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn whatsapp-btn"
               >
                 <WhatsAppIcon className="btn-icon" />
-                <span>WhatsApp Us</span>
+                <span>{t.contact.waBtn}</span>
+              </a>
+
+              <a
+                href={GOOGLE_MAPS_URL || '#'}
+                onClick={handleDirectionsClick}
+                target={GOOGLE_MAPS_URL ? "_blank" : "_self"}
+                rel="noopener noreferrer"
+                className="btn secondary-light-btn"
+              >
+                <NavigationIcon className="btn-icon" />
+                <span>{t.contact.getDirectionsBtn}</span>
               </a>
             </div>
           </div>
@@ -84,26 +113,25 @@ export const Contact: React.FC = () => {
             <div className="map-placeholder-card">
               <div className="map-badge">
                 <LocationIcon className="icon-sm" />
-                <span>Nellore Workshop Location</span>
+                <span>{t.contact.workshopTitle}</span>
               </div>
               
               <div className="map-visual">
-                <div className="map-pin-pulse"></div>
                 <div className="map-pin">📍</div>
-                <h3>Venkateswara Cane Work</h3>
-                <p>Nellore, Andhra Pradesh</p>
-                <span className="map-sub">Konda Pavan Kumar</span>
+                <h3>{t.brandName}</h3>
+                <p>{t.locationName}</p>
+                <span className="map-sub">{t.ownerName}</span>
               </div>
 
               <div className="map-footer-note">
-                <p>📍 Visiting our workshop? Call +91 9966232996 for direct directions and doorstep service across Nellore.</p>
+                <p>📍 {t.contact.locationNote}</p>
                 <a
-                  href="https://wa.me/919966232996?text=Hi%20Konda%20Pavan%20Kumar,%20please%20send%20your%20workshop%20location."
+                  href={`https://wa.me/919966232996?text=${waLocationText}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-map-location"
                 >
-                  Request Shop Location on WhatsApp →
+                  {t.contact.locationReqBtn}
                 </a>
               </div>
             </div>
