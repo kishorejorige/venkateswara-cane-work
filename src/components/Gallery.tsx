@@ -23,13 +23,6 @@ export const Gallery: React.FC = () => {
       category: t.gallery.items.item2Cat,
       image: '/images/hanging-chair.png',
       description: t.gallery.items.item2Desc,
-    },
-    {
-      id: 'item-3',
-      title: t.gallery.items.item3Title,
-      category: t.gallery.items.item3Cat,
-      image: '/images/shop-banner.jpg',
-      description: t.gallery.items.item3Desc,
     }
   ];
 
@@ -38,7 +31,6 @@ export const Gallery: React.FC = () => {
     : galleryItems.filter(item => {
         if (activeFilter === 'chair') return item.id === 'item-1';
         if (activeFilter === 'swing') return item.id === 'item-2';
-        if (activeFilter === 'sofa') return item.id === 'item-3';
         return true;
       });
 
@@ -77,32 +69,26 @@ export const Gallery: React.FC = () => {
         <div className="gallery-filter-tabs">
           <button 
             className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('all')}
+            onClick={() => { setActiveFilter('all'); setSelectedIndex(null); }}
           >
             {t.gallery.filterAll}
           </button>
           <button 
             className={`filter-btn ${activeFilter === 'chair' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('chair')}
+            onClick={() => { setActiveFilter('chair'); setSelectedIndex(null); }}
           >
             {t.gallery.filterChairs}
           </button>
           <button 
             className={`filter-btn ${activeFilter === 'swing' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('swing')}
+            onClick={() => { setActiveFilter('swing'); setSelectedIndex(null); }}
           >
             {t.gallery.filterSwings}
           </button>
-          <button 
-            className={`filter-btn ${activeFilter === 'sofa' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('sofa')}
-          >
-            {t.gallery.filterSofas}
-          </button>
         </div>
 
-        {/* Responsive Gallery Grid */}
-        <div className="gallery-grid-cards">
+        {/* Responsive Gallery Grid (2-column layout for 2 products) */}
+        <div className="gallery-grid-cards two-column">
           {filteredItems.map((item, index) => (
             <div 
               key={item.id} 
