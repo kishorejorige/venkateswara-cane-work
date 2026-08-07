@@ -14,14 +14,14 @@ export const Gallery: React.FC = () => {
       id: 'item-1',
       title: t.gallery.items.item1Title,
       category: t.gallery.items.item1Cat,
-      image: '/images/chair.png',
+      image: `${import.meta.env.BASE_URL}images/chair.png`,
       description: t.gallery.items.item1Desc,
     },
     {
       id: 'item-2',
       title: t.gallery.items.item2Title,
       category: t.gallery.items.item2Cat,
-      image: '/images/hanging-chair.png',
+      image: `${import.meta.env.BASE_URL}images/hanging-chair.png`,
       description: t.gallery.items.item2Desc,
     }
   ];

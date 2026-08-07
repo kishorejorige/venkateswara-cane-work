@@ -59,7 +59,7 @@ export const Hero: React.FC = () => {
             <div className="hero-backdrop-glow"></div>
             <div className="hero-image-card">
               <img
-                src="/images/chair.png"
+                src={`${import.meta.env.BASE_URL}images/chair.png`}
                 alt="Handcrafted Cane Chair by Venkateswara Cane Work in Nellore"
                 loading="eager"
                 className="hero-furniture-img"
