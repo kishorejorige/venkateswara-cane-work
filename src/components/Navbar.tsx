@@ -21,7 +21,6 @@ export const Navbar: React.FC = () => {
     <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <a href="#home" className="brand-logo" onClick={closeMobileMenu}>
-          <span className="brand-telugu">వెంకటేశ్వర కేన్ వర్క్</span>
           <span className="brand-title">Venkateswara Cane Work</span>
         </a>
 

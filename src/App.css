@@ -1780,6 +1780,14 @@ html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4 {
     padding: 12px 4%;
   }
 
+  html {
+    scroll-padding-top: 74px;
+  }
+
+  section, .hero-section {
+    scroll-margin-top: 74px;
+  }
+
   .brand-title {
     font-size: 1.1rem;
   }
