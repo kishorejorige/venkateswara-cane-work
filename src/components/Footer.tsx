@@ -12,7 +12,6 @@ export const Footer: React.FC = () => {
       <div className="footer-container">
         <div className="footer-top-grid">
           <div className="footer-brand-col">
-            <span className="footer-brand-telugu">{t.brandTelugu}</span>
             <strong className="footer-brand-title">{t.brandName}</strong>
             <p className="footer-tagline">{t.footer.tagline}</p>
           </div>
