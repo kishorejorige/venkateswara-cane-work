@@ -52,6 +52,10 @@ export const Footer: React.FC = () => {
         <div className="footer-bottom-row">
           <p className="footer-copyright">
             © {new Date().getFullYear()} {t.brandName}, {t.locationName}. {t.footer.rights}
+            {" • "}
+            <a href="#/admin" style={{ color: 'inherit', textDecoration: 'underline', opacity: 0.8 }}>
+              Admin Login
+            </a>
           </p>
 
           <p className="footer-birthday-note">
