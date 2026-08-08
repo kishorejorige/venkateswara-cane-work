@@ -23,7 +23,6 @@ export const Footer: React.FC = () => {
               <li><a href="#about">{t.nav.about}</a></li>
               <li><a href="#services">{t.nav.services}</a></li>
               <li><a href="#gallery">{t.nav.gallery}</a></li>
-              <li><a href="#how-to-order">{t.nav.howToOrder}</a></li>
               <li><a href="#why-us">{t.nav.whyUs}</a></li>
               <li><a href="#contact">{t.nav.contact}</a></li>
             </ul>
