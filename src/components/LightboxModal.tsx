@@ -9,6 +9,7 @@ export interface GalleryItem {
   image: string;
   description: string;
   dimensions?: string;
+  filterKey?: string;
 }
 
 interface LightboxModalProps {

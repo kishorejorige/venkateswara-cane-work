@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 import { LanguageProvider } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
@@ -12,6 +13,7 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { FloatingWhatsapp } from './components/FloatingWhatsapp';
 import { MobileActionBar } from './components/MobileActionBar';
+import { AdminApp } from './admin/AdminApp';
 
 function AppContent() {
   return (
@@ -35,9 +37,34 @@ function AppContent() {
 }
 
 function App() {
+  const [isAdminRoute, setIsAdminRoute] = useState<boolean>(() => {
+    return window.location.hash === '#/admin' || window.location.hash.startsWith('#/admin');
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const isAdmin = window.location.hash === '#/admin' || window.location.hash.startsWith('#/admin');
+      setIsAdminRoute(isAdmin);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  const handleNavigateHome = () => {
+    window.location.hash = '';
+    setIsAdminRoute(false);
+  };
+
   return (
     <LanguageProvider>
-      <AppContent />
+      {isAdminRoute ? (
+        <AdminApp onNavigateHome={handleNavigateHome} />
+      ) : (
+        <AppContent />
+      )}
     </LanguageProvider>
   );
 }
