@@ -36,13 +36,14 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
       });
 
       if (error) {
-        setErrorMessage(error.message || 'Invalid login credentials.');
+        console.error('Supabase login error:', error);
+        setErrorMessage('Invalid email or password. Please try again.');
       } else {
         onLoginSuccess();
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Network error occurred. Please try again.';
-      setErrorMessage(msg);
+      console.error('Unexpected login error:', err);
+      setErrorMessage('Network error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -53,8 +54,8 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
       <div className="admin-login-card">
         <div className="admin-login-header">
           <h1 className="admin-login-brand">Venkateswara Cane Work</h1>
-          <h2 className="admin-login-title">Admin Login</h2>
-          <p className="admin-login-sub">Sign in to manage products and gallery images</p>
+          <h2 className="admin-login-title">Shop Owner Login</h2>
+          <p className="admin-login-sub">Sign in to manage your product catalog</p>
         </div>
 
         {!isSupabaseConfigured() && (
@@ -118,3 +119,4 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
     </div>
   );
 };
+
