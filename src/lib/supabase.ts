@@ -46,30 +46,37 @@ export const getPublicImageUrl = (imagePath: string): string => {
     return '';
   }
 
-  // Already a complete URL or local public path.
-  if (
-    imagePath.startsWith('http://') ||
-    imagePath.startsWith('https://') ||
-    imagePath.startsWith('/')
-  ) {
-    return imagePath;
+  const path = imagePath.trim();
+
+  // Full external URL
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+
+  // Local public asset (starts with / or images/)
+  if (path.startsWith('/') || path.startsWith('images/')) {
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+      ? import.meta.env.BASE_URL
+      : `${import.meta.env.BASE_URL}/`;
+    return `${baseUrl}${cleanPath}`;
   }
 
   // If Supabase isn't configured yet, return the original path.
   if (!isSupabaseConfigured()) {
-    return imagePath;
+    return path;
   }
 
   const { data } = supabase.storage
     .from(STORAGE_BUCKET)
-    .getPublicUrl(imagePath);
+    .getPublicUrl(path);
 
   return data.publicUrl;
 };
 
 /**
  * Determines whether an image_path is a file stored in Supabase Storage.
- * Returns false for local public assets (e.g. /images/..., chair.png, hanging-chair.png)
+ * Returns false for local public assets (e.g. /images/..., images/...)
  * and external HTTP/HTTPS URLs.
  */
 export const isStorageImagePath = (imagePath: string): boolean => {
@@ -79,9 +86,7 @@ export const isStorageImagePath = (imagePath: string): boolean => {
     path.startsWith('http://') ||
     path.startsWith('https://') ||
     path.startsWith('/') ||
-    path.startsWith('images/') ||
-    path === 'chair.png' ||
-    path === 'hanging-chair.png'
+    path.startsWith('images/')
   ) {
     return false;
   }
